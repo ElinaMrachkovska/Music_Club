@@ -66,7 +66,6 @@ onFileSelected(event: any): void {
 
   this.selectedFile = file;
   
-  // Використовуємо URL.createObjectURL замість FileReader
   this.imagePreview = URL.createObjectURL(file);
   console.log('Preview URL:', this.imagePreview);
 }
@@ -118,21 +117,20 @@ selectPreset(preset: BandPreset): void {
       this.errorMessage = '⚠️ На цьому фото текст не знайдено.';
     }
     this.isLoading = false;
-    this.cdr.detectChanges(); // ← додай це
+    this.cdr.detectChanges();
   });
 },
 error: (err) => {
   this.ngZone.run(() => {
     this.errorMessage = `Помилка API: ${err.status} ${err.statusText}`;
     this.isLoading = false;
-    this.cdr.detectChanges(); // ← і це
+    this.cdr.detectChanges(); 
   });
 }
 
 });
   }
 
-  // Кнопка "Розпізнати текст" тепер викликає sendToApi напряму
   recognizeText(): void {
     this.sendToApi();
   }
